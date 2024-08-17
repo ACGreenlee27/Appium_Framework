@@ -1,16 +1,13 @@
-import { expect } from '@wdio/globals'
-import LoginPage from '../pageobjects/login.page.js'
-import SecurePage from '../pageobjects/secure.page.js'
+describe('Android Elements Test', () => {
+ it('Find element by accessibility id', async () => {
+   // find element by accessibility id
+   const appOption = await $('~App');
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
-        await LoginPage.open()
+   // click on element
+   await appOption.click();
 
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!')
-        await expect(SecurePage.flashAlert).toBeExisting()
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
-            'You logged into a secure area!')
-        await expect(SecurePage.flashAlert).toMatchElementSnapshot('flashAlert')
-    })
-})
-
+   // assertion
+   const actionBar = await $('~Action Bar');
+   await expect(actionBar).toBeExisting();
+ })
+});
